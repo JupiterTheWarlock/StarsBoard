@@ -1,0 +1,17 @@
+{
+  "name": "stars-board",
+  "version": "1.0.0",
+  "description": "GitHub Stars 自动标注与 README 生成系统",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": ["github", "stars", "ai", "readme", "automation"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.68.4"
+  }
+}
