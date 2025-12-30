@@ -53,3 +53,8 @@ export function groupStarsByTag(stars) {
 
   return grouped;
 }
+
+export async function saveTagsGrouped(grouped) {
+  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.writeFile(TAGS_FILE, JSON.stringify(grouped, null, 2), 'utf-8');
+}
