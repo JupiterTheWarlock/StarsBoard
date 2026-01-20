@@ -73,8 +73,30 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add README.md datas/ || true
+
+          echo "=== 检查文件状态 ==="
+          git status
+          echo ""
+          echo "=== 检查 README.md 前几行 ==="
+          head -20 README.md
+          echo ""
+          echo "=== 检查 datas/stars.json 大小 ==="
+          wc -c datas/stars.json || echo "文件不存在"
+          echo ""
+          echo "=== 检查 datas/tags.json 大小 ==="
+          wc -c datas/tags.json || echo "文件不存在"
+          echo ""
+          echo "=== 尝试添加文件 ==="
+          git add README.md datas/
+          echo ""
+          echo "=== 检查暂存区状态 ==="
+          git status
+          echo ""
+          echo "=== 尝试提交 ==="
           git diff --staged --quiet || git commit -m "chore: update stars readme [skip ci]"
+          echo ""
+          echo "=== 最终状态 ==="
+          git status
 
       # 7. 推送到仓库
       - name: Push changes
