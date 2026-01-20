@@ -50,7 +50,7 @@ jobs:
       - name: Run StarsBoard
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USERNAME: ${{ github.repository_owner }}
+          GITHUB_USERNAME: ${{ vars.USERNAME || github.repository_owner }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
           AI_MODEL: ${{ vars.AI_MODEL }}

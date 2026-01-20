@@ -52,7 +52,7 @@ You can customize workflow behavior by configuring Variables. Default values wil
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `GITHUB_USERNAME` | GitHub username | Auto-detected from repository owner |
+| `USERNAME` | GitHub username (usually not needed, auto-detected from repository owner) | Auto-detected |
 | `LANGUAGE` | Tag language | `en` |
 | `OPENAI_BASE_URL` | AI API endpoint | `https://api.openai.com/v1` |
 | `AI_MODEL` | AI model | `gpt-4o` |

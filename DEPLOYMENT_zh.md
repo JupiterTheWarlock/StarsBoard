@@ -52,7 +52,7 @@
 
 | 变量名 | 说明 | 默认值 |
 |--------|------|--------|
-| `GITHUB_USERNAME` | GitHub 用户名 | 自动获取仓库所有者 |
+| `USERNAME` | GitHub 用户名（通常无需配置，自动获取仓库所有者） | 自动获取 |
 | `LANGUAGE` | 标签语言 | `en` |
 | `OPENAI_BASE_URL` | AI API 地址 | `https://api.openai.com/v1` |
 | `AI_MODEL` | AI 模型 | `gpt-4o` |
