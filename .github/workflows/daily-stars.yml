@@ -59,6 +59,7 @@ jobs:
           ENABLE_NEW_TAGS: ${{ vars.ENABLE_NEW_TAGS || 'true' }}
           ENABLE_THINKING: ${{ vars.ENABLE_THINKING || 'false' }}
           BATCH_SIZE: ${{ vars.BATCH_SIZE || '5' }}
+          LANGUAGE: ${{ vars.LANGUAGE || 'en' }}
         run: npm run start
 
       # 6. 提交更改

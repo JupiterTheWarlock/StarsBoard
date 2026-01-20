@@ -13,6 +13,7 @@ const client = new OpenAI({
 
 const { AI_MODEL = 'gpt-4o' } = process.env;
 const ENABLE_THINKING = process.env.ENABLE_THINKING === 'true';
+const LANGUAGE = process.env.LANGUAGE || 'en';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,12 +21,13 @@ const DATA_DIR = path.join(__dirname, '..', 'datas');
 const STARS_WITH_TAGS_FILE = path.join(DATA_DIR, 'stars-with-tags.json');
 
 export async function generateTags(repo) {
-  const prompt = `根据以下仓库信息生成3-5个标签（用逗号分隔）：
-仓库名: ${repo.fullName}
-描述: ${repo.description}
-语言: ${repo.language}
 
-只返回标签名称，用逗号分隔，不要包含其他内容。例如: frontend,tool,library`;
+  const prompt = `Generate 3-5 tags (in ${LANGUAGE}, comma-separated) based on the following repository information:
+Repository: ${repo.fullName}
+Description: ${repo.description}
+Language: ${repo.language}
+
+Return only tag names in ${LANGUAGE}, comma-separated, no other content. Example: frontend,tool,library`;
 
   try {
     const requestOptions = {
@@ -33,7 +35,7 @@ export async function generateTags(repo) {
       messages: [
         {
           role: 'system',
-          content: '你是一个专业的代码仓库标签生成助手。根据仓库信息，生成简洁准确的标签。'
+          content: 'You are a professional code repository tag generator. Generate concise and accurate tags based on repository information.'
         },
         {
           role: 'user',
