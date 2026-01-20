@@ -1,15 +1,30 @@
 # Ralph Development Instructions
 
 ## Context
-You are Ralph, an autonomous AI development agent working on a [YOUR PROJECT NAME] project.
+You are Ralph, an autonomous AI development agent working on **StarsBoard** - a GitHub Stars auto-tagging and README generation system.
+
+## Project Overview
+StarsBoard is a Node.js/TypeScript application that:
+- Fetches all GitHub stars for a user via GitHub API
+- Uses AI (OpenAI/compatible) to generate 3-5 descriptive tags per repository
+- Generates a structured README.md grouped by tags
+- Runs daily via GitHub Actions (UTC 0:00)
+- Supports incremental updates with caching
+
+## Tech Stack
+- **Runtime**: Node.js with TypeScript
+- **AI**: OpenAI API (compatible with custom base URLs)
+- **Data Storage**: JSON files (`datas/tags.json`, `datas/stars.json`)
+- **CI/CD**: GitHub Actions
+- **Testing**: Jest/Vitest
 
 ## Current Objectives
-1. Study specs/* to learn about the project specifications
+1. Study specs/PRD.md to understand the full product requirements
 2. Review @fix_plan.md for current priorities
 3. Implement the highest priority item using best practices
 4. Use parallel subagents for complex tasks (max 100 concurrent)
 5. Run tests after each implementation
-6. Update documentation and fix_plan.md
+6. Update documentation and @fix_plan.md
 
 ## Key Principles
 - ONE task per loop - focus on the most important thing
@@ -268,11 +283,13 @@ RECOMMENDATION: Blocked on [specific dependency] - need [what's needed]
 ---
 
 ## File Structure
-- specs/: Project specifications and requirements
-- src/: Source code implementation  
-- examples/: Example usage and test cases
-- @fix_plan.md: Prioritized TODO list
-- @AGENT.md: Project build and run instructions
+- `specs/PRD.md`: Product Requirements Document (in Chinese)
+- `src/`: Source code implementation (TypeScript)
+- `datas/`: Data files (tags.txt, tag-keywords.json, generated JSON)
+- `tests/`: Test files (Jest/Vitest)
+- `@fix_plan.md`: Prioritized TODO list
+- `@AGENT.md`: Project build and run instructions
+- `.github/workflows/`: GitHub Actions CI/CD configuration
 
 ## Current Task
 Follow @fix_plan.md and choose the most important item to implement next.

@@ -1,49 +1,95 @@
-# Agent Build Instructions
+# StarsBoard Build Instructions
 
 ## Project Setup
 ```bash
-# Install dependencies (example for Node.js project)
+# Install dependencies
 npm install
 
-# Or for Python project
-pip install -r requirements.txt
+# Or with pnpm
+pnpm install
 
-# Or for Rust project  
-cargo build
+# Or with yarn
+yarn install
+```
+
+## Environment Configuration
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit .env with your values:
+# - GITHUB_TOKEN: GitHub Personal Access Token
+# - GITHUB_USERNAME: Your GitHub username
+# - OPENAI_API_KEY: OpenAI API key (or compatible)
+# - OPENAI_BASE_URL: (optional) Custom AI base URL
+# - AI_MODEL: (optional) Model name, default gpt-4o
 ```
 
 ## Running Tests
 ```bash
-# Node.js
+# Run all tests
 npm test
 
-# Python
-pytest
+# Run tests in watch mode
+npm run test:watch
 
-# Rust
-cargo test
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests for specific file
+npm test -- github.test.ts
 ```
 
 ## Build Commands
 ```bash
-# Production build
+# TypeScript type check
+npm run type-check
+
+# Build TypeScript to JavaScript
 npm run build
-# or
-cargo build --release
+
+# Build and run main script
+npm run start
+
+# Run directly with tsx (development)
+npm run dev
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
 ```
 
-## Development Server
+## Running the Application
 ```bash
-# Start development server
-npm run dev
-# or
-cargo run
+# Run the main stars processing script
+npm run start
+
+# Run with custom environment variables
+GITHUB_USERNAME=myuser OPENAI_API_KEY=xxx npm run start
 ```
 
 ## Key Learnings
-- Update this section when you learn new build optimizations
-- Document any gotchas or special setup requirements
-- Keep track of the fastest test/build cycle
+- **Build Tool**: Using `tsup` for fast TypeScript builds
+- **Test Runner**: Vitest for fast unit tests with built-in coverage
+- **AI Client**: OpenAI SDK (supports custom base URLs for compatible APIs)
+- **GitHub API**: Using `octokit` or native fetch
+- **Data Files**: All JSON files stored in `datas/` directory
+- **Logging**: Date-based logs in `logs/YYYY-MM-DD.log`
+
+## Project Structure Notes
+```
+src/
+├── index.ts           # Main entry point
+├── config/            # Configuration management
+├── github/            # GitHub API client
+├── ai/                # AI tag generation
+├── tags/              # Tag management
+├── readme/            # README generation
+├── cache/             # Cache management
+└── utils/             # Utility functions
+```
 
 ## Feature Development Quality Standards
 
@@ -59,10 +105,8 @@ cargo run
   - End-to-end tests for critical user workflows
 - **Coverage Validation**: Run coverage reports before marking features complete:
   ```bash
-  # Examples by language/framework
+  # Vitest coverage for StarsBoard
   npm run test:coverage
-  pytest --cov=src tests/ --cov-report=term-missing
-  cargo tarpaulin --out Html
   ```
 - **Test Quality**: Tests must validate behavior, not just achieve coverage metrics
 - **Test Documentation**: Complex test scenarios must include comments explaining the test strategy
