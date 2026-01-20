@@ -20,7 +20,7 @@
 
 #### 2.1 GITHUB_TOKEN
 
-`GITHUB_TOKEN` 由 GitHub Actions 自动提供，无需手动配置。
+`GITHUB_TOKEN` 由 GitHub Actions 自动提供，用于提交更改到仓库。
 
 **需要的权限范围**：
 - `repo` (完整仓库访问权限)
@@ -31,7 +31,30 @@
 2. 在 **Workflow permissions** 中选择 **Read and write permissions**
 3. 点击 **Save**
 
-#### 2.2 OPENAI_API_KEY
+#### 2.2 STAR_TOKEN（必需）
+
+`STAR_TOKEN` 是一个 **Personal Access Token (PAT)**，用于访问你的 GitHub Stars 数据。
+
+**为什么需要 STAR_TOKEN**：
+- GitHub Actions 自动提供的 `GITHUB_TOKEN` **无法**访问 `/user/starred` API 端点（会返回 403 Forbidden）
+- 必须使用带有 `read:user` 权限的 Personal Access Token
+
+**创建 STAR_TOKEN 的步骤**：
+1. 访问 https://github.com/settings/tokens/new
+2. 输入描述（如：`StarsBoard`）
+3. 勾选以下权限：
+   - `read:user`（或直接勾选 `user` 权限组）
+4. 点击页面底部的 **"Generate token"** 按钮
+5. **立即复制生成的 token**（只显示一次！）
+
+**添加到仓库 Secrets**：
+1. 进入仓库 **Settings** → **Secrets and variables** → **Actions**
+2. 点击 **"New repository secret"** 按钮
+3. Name 填入：`STAR_TOKEN`
+4. Secret 填入刚才复制的 PAT
+5. 点击 **"Add secret"**
+
+#### 2.3 OPENAI_API_KEY
 
 1. 获取 OpenAI API Key：访问 [OpenAI Platform](https://platform.openai.com/api-keys)
 2. 在仓库中进入 **Settings** → **Secrets and variables** → **Actions**
@@ -144,6 +167,16 @@ Value: gpt-4o
 ---
 
 ## 故障排查
+
+### 问题：工作流失败，提示 "GitHub API error: 403 Forbidden"
+
+**原因**: 缺少 `STAR_TOKEN` secret 或 token 权限不足
+
+**解决**:
+1. 按照 [第 2.2 节](#22-star_token必需) 的步骤创建 Personal Access Token
+2. 确保勾选了 `read:user` 权限
+3. 将 token 添加到仓库 Secrets，命名为 `STAR_TOKEN`
+4. 重新运行工作流
 
 ### 问题：工作流失败，提示 "Resource not accessible"
 

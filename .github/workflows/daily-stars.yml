@@ -21,6 +21,9 @@ on:
       - 'package.json'
       - 'tsconfig.json'
 
+permissions:
+  contents: write
+
 jobs:
   update-stars:
     name: Fetch Stars and Generate README
@@ -47,9 +50,12 @@ jobs:
         run: npm run build
 
       # 5. 运行 StarsBoard（使用环境变量）
+      # 注意: 需要在仓库 Secrets 中添加 STAR_TOKEN (Personal Access Token)
+      # PAT 需要有 'read:user' 或 'user' scope 权限
       - name: Run StarsBoard
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 使用 STAR_TOKEN 而不是 GITHUB_TOKEN，因为后者无法访问 user starred API
+          GITHUB_TOKEN: ${{ secrets.STAR_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: ${{ vars.USERNAME || github.repository_owner }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}

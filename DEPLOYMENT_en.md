@@ -20,7 +20,7 @@ This guide will help you create a repository using the StarsBoard template and c
 
 #### 2.1 GITHUB_TOKEN
 
-`GITHUB_TOKEN` is automatically provided by GitHub Actions, no manual configuration needed.
+`GITHUB_TOKEN` is automatically provided by GitHub Actions for committing changes to the repository.
 
 **Required Permissions**:
 - `repo` (full repository access)
@@ -31,7 +31,30 @@ If the workflow fails due to permission issues:
 2. Under **Workflow permissions**, select **Read and write permissions**
 3. Click **Save**
 
-#### 2.2 OPENAI_API_KEY
+#### 2.2 STAR_TOKEN (Required)
+
+`STAR_TOKEN` is a **Personal Access Token (PAT)** required to access your GitHub Stars data.
+
+**Why STAR_TOKEN is needed**:
+- The auto-generated `GITHUB_TOKEN` **cannot** access the `/user/starred` API endpoint (returns 403 Forbidden)
+- You must use a Personal Access Token with `read:user` scope
+
+**Creating STAR_TOKEN**:
+1. Visit https://github.com/settings/tokens/new
+2. Enter a description (e.g., `StarsBoard`)
+3. Select the following scopes:
+   - `read:user` (or select the entire `user` scope group)
+4. Click **"Generate token"** at the bottom
+5. **Copy the generated token immediately** (it's only shown once!)
+
+**Add to Repository Secrets**:
+1. Go to repository **Settings** → **Secrets and variables** → **Actions**
+2. Click the **"New repository secret"** button
+3. Enter **Name**: `STAR_TOKEN`
+4. Paste your PAT in **Secret**
+5. Click **"Add secret"**
+
+#### 2.3 OPENAI_API_KEY
 
 1. Get your OpenAI API Key: Visit [OpenAI Platform](https://platform.openai.com/api-keys)
 2. In your repository, go to **Settings** → **Secrets and variables** → **Actions**
@@ -144,6 +167,16 @@ You can customize tags by editing files in your repository:
 ---
 
 ## Troubleshooting
+
+### Issue: Workflow fails with "GitHub API error: 403 Forbidden"
+
+**Cause**: Missing `STAR_TOKEN` secret or insufficient token permissions
+
+**Solution**:
+1. Follow the steps in [Section 2.2](#22-star_token-required) to create a Personal Access Token
+2. Make sure you selected the `read:user` scope
+3. Add the token to repository Secrets as `STAR_TOKEN`
+4. Re-run the workflow
 
 ### Issue: Workflow fails with "Resource not accessible"
 
