@@ -10,8 +10,8 @@ import type { Star } from '../types.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DATA_DIR = path.join(__dirname, '..', '..', 'datas');
-const STARS_WITH_TAGS_FILE = path.join(DATA_DIR, 'stars-with-tags.json');
+const DATA_DIR = path.join(__dirname, '..', 'datas');
+const STARS_WITH_TAGS_FILE = path.join(__dirname, '..', 'datas', 'stars-with-tags.json');
 
 const client = new OpenAI({
   baseURL: config.openaiBaseUrl,
@@ -133,8 +133,11 @@ ${suggestion}
 export async function loadStarsWithTags(): Promise<Star[]> {
   try {
     const data = await fs.readFile(STARS_WITH_TAGS_FILE, 'utf-8');
-    return JSON.parse(data) as Star[];
-  } catch {
+    const parsed = JSON.parse(data) as Star[];
+    console.log(`📦 从缓存加载了 ${parsed.length} 个仓库 (${STARS_WITH_TAGS_FILE})`);
+    return parsed;
+  } catch (err) {
+    console.log(`📦 缓存文件不存在或读取失败 (${STARS_WITH_TAGS_FILE}): ${(err as Error).message}`);
     return [];
   }
 }

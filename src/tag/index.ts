@@ -6,9 +6,9 @@ import type { Star, StarsByTag } from '../types.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DATA_DIR = path.join(__dirname, '..', '..', 'datas');
-const TAGS_FILE = path.join(DATA_DIR, 'tags.json');
-const STARS_FILE = path.join(DATA_DIR, 'stars.json');
+const TAGS_FILE = path.join(__dirname, '..', 'datas', 'tags.json');
+const STARS_FILE = path.join(__dirname, '..', 'datas', 'stars.json');
+const DATA_DIR = path.join(__dirname, '..', 'datas');
 
 /**
  * Ensures the data directory exists

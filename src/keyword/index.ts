@@ -6,9 +6,9 @@ import type { Star, TagKeywords } from '../types.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DATA_DIR = path.join(__dirname, '..', '..', 'datas');
-const TAGS_TXT_FILE = path.join(DATA_DIR, 'tags.txt');
-const TAG_KEYWORDS_FILE = path.join(DATA_DIR, 'tag-keywords.json');
+const TAGS_TXT_FILE = path.join(__dirname, '..', 'datas', 'tags.txt');
+const TAG_KEYWORDS_FILE = path.join(__dirname, '..', 'datas', 'tag-keywords.json');
+const DATA_DIR = path.join(__dirname, '..', 'datas');
 
 /**
  * Loads tags from tags.txt file
