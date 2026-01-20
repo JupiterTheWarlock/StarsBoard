@@ -37,13 +37,13 @@
 
 **为什么需要 STAR_TOKEN**：
 - GitHub Actions 自动提供的 `GITHUB_TOKEN` **无法**访问 `/user/starred` API 端点（会返回 403 Forbidden）
-- 必须使用带有 `read:user` 权限的 Personal Access Token
+- 必须使用带有 `repo` 权限的 Personal Access Token（Classic PAT）
 
 **创建 STAR_TOKEN 的步骤**：
 1. 访问 https://github.com/settings/tokens/new
 2. 输入描述（如：`StarsBoard`）
 3. 勾选以下权限：
-   - `read:user`（或直接勾选 `user` 权限组）
+   - `repo`（完整仓库访问权限）
 4. 点击页面底部的 **"Generate token"** 按钮
 5. **立即复制生成的 token**（只显示一次！）
 
@@ -174,7 +174,7 @@ Value: gpt-4o
 
 **解决**:
 1. 按照 [第 2.2 节](#22-star_token必需) 的步骤创建 Personal Access Token
-2. 确保勾选了 `read:user` 权限
+2. 确保勾选了 `repo` 权限（Classic PAT）
 3. 将 token 添加到仓库 Secrets，命名为 `STAR_TOKEN`
 4. 重新运行工作流
 

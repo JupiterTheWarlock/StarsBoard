@@ -37,13 +37,13 @@ If the workflow fails due to permission issues:
 
 **Why STAR_TOKEN is needed**:
 - The auto-generated `GITHUB_TOKEN` **cannot** access the `/user/starred` API endpoint (returns 403 Forbidden)
-- You must use a Personal Access Token with `read:user` scope
+- You must use a Personal Access Token with `repo` scope (Classic PAT)
 
 **Creating STAR_TOKEN**:
 1. Visit https://github.com/settings/tokens/new
 2. Enter a description (e.g., `StarsBoard`)
 3. Select the following scopes:
-   - `read:user` (or select the entire `user` scope group)
+   - `repo` (full repository access)
 4. Click **"Generate token"** at the bottom
 5. **Copy the generated token immediately** (it's only shown once!)
 
@@ -174,7 +174,7 @@ You can customize tags by editing files in your repository:
 
 **Solution**:
 1. Follow the steps in [Section 2.2](#22-star_token-required) to create a Personal Access Token
-2. Make sure you selected the `read:user` scope
+2. Make sure you selected the `repo` scope (Classic PAT)
 3. Add the token to repository Secrets as `STAR_TOKEN`
 4. Re-run the workflow
 
