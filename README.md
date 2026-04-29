@@ -4,6 +4,8 @@ A GitHub Stars board with AI-powered tagging and a searchable web UI.
 
 StarsBoard automatically fetches your GitHub starred repositories, tags them using LLM, generates embeddings for semantic search, and presents everything in a beautiful terminal-themed web interface.
 
+![StarsBoard Screenshot](stars-screenshot.png)
+
 ## Features
 
 - **Auto-tagging** — AI (OpenAI-compatible) categorizes your stars into meaningful tags
